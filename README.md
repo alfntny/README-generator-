@@ -51,9 +51,11 @@ npm i -g vercel   # if you don't have the CLI
 vercel             # from the project root; follow the prompts
 ```
 
-- `vercel.json` rewrites every `/api/*` request to the single `api/index.py`
-  function, which just imports the real FastAPI app from `backend/main.py` —
-  so there's one set of route definitions, used both locally and on Vercel.
+- `api/index.py` just imports the real FastAPI app from `backend/main.py`, so
+  there's one set of route definitions, used both locally and on Vercel.
+  Vercel's zero-config FastAPI detection reads the app's actual routes
+  directly (no `rewrites` needed — an older `vercel.json` with a manual
+  `/api/*` rewrite can actually conflict with this and cause 404s).
 - Everything in `public/` is served by Vercel directly as static assets; the
   function is never hit for `/`, `/style.css`, etc.
 - If you want LLM-written prose instead of the template fallback, set

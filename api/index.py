@@ -1,11 +1,13 @@
 """
 Vercel entrypoint.
 
-Vercel's Python runtime looks for a module-level `app` (WSGI or ASGI) in any
-file under /api and wraps it as a serverless function. vercel.json rewrites
-every /api/* request to this one function, which re-exports the real FastAPI
-app defined in backend/main.py -- so the route definitions live in one place
-and work identically under `uvicorn` locally and on Vercel.
+Vercel's zero-config FastAPI detection introspects a module-level `app`
+(the actual FastAPI instance, with its real routes) at a supported
+entrypoint like this one. This file just re-exports the real app defined in
+backend/main.py -- so the route definitions live in one place and work
+identically under `uvicorn` locally and on Vercel. No vercel.json rewrites
+are needed (and one that rewrites /api/* to this file can actually conflict
+with the zero-config routing and cause 404s).
 """
 
 import os
