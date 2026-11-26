@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>README Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="sunset-bg" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="sun"></div>
+
+    <svg class="cloud cloud-1" viewBox="0 0 8 4" preserveAspectRatio="none">
+      <g shape-rendering="crispEdges" fill="currentColor">
+        <rect x="2" y="0" width="4" height="1"/>
+        <rect x="1" y="1" width="6" height="1"/>
+        <rect x="0" y="2" width="8" height="1"/>
+        <rect x="1" y="3" width="6" height="1"/>
+      </g>
+    </svg>
+    <svg class="cloud cloud-2" viewBox="0 0 8 4" preserveAspectRatio="none">
+      <g shape-rendering="crispEdges" fill="currentColor">
+        <rect x="2" y="0" width="4" height="1"/>
+        <rect x="1" y="1" width="6" height="1"/>
+        <rect x="0" y="2" width="8" height="1"/>
+        <rect x="1" y="3" width="6" height="1"/>
+      </g>
+    </svg>
+    <svg class="cloud cloud-3" viewBox="0 0 8 4" preserveAspectRatio="none">
+      <g shape-rendering="crispEdges" fill="currentColor">
+        <rect x="2" y="0" width="4" height="1"/>
+        <rect x="1" y="1" width="6" height="1"/>
+        <rect x="0" y="2" width="8" height="1"/>
+        <rect x="1" y="3" width="6" height="1"/>
+      </g>
+    </svg>
+
+    <div class="grid-floor"></div>
+    <div class="scanlines"></div>
+  </div>
+
+  <header>
+    <h1>README<span class="accent">_</span>GEN</h1>
+    <p class="subtitle">Describe your project, or upload it — get a ready-to-use README.md</p>
+  </header>
+
+  <main>
+    <section class="panel input-panel">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="prompt">Describe it</button>
+        <button class="tab-btn" data-tab="upload">Upload files</button>
+      </div>
+
+      <div class="tab-content" id="tab-prompt">
+        <label for="prompt-input">What's the project?</label>
+        <textarea id="prompt-input" rows="10" placeholder="e.g. A Flask web app that lets users track their daily water intake, with a login system and a chart of weekly progress. Built with Python, Flask, SQLite, and Chart.js."></textarea>
+        <button id="generate-prompt-btn" class="primary-btn">Generate README</button>
+      </div>
+
+      <div class="tab-content hidden" id="tab-upload">
+        <label for="file-input">Project files or a .zip</label>
+        <div id="drop-zone" class="drop-zone">
+          <p>Drag &amp; drop files/folder or a .zip here, or click to browse</p>
+          <input type="file" id="file-input" multiple webkitdirectory style="display:none" />
+        </div>
+        <div id="file-list" class="file-list"></div>
+
+        <label for="upload-context-input">Anything to add? (optional)</label>
+        <textarea id="upload-context-input" rows="3" placeholder="e.g. this is a final-year ML project focused on cross-regional generalisation"></textarea>
+        <button id="generate-upload-btn" class="primary-btn">Analyze &amp; Generate README</button>
+      </div>
+
+      <p id="status-msg" class="status"></p>
+    </section>
+
+    <section class="panel output-panel">
+      <div class="output-header">
+        <h2>Preview</h2>
+        <div class="output-actions">
+          <button id="copy-btn" disabled>Copy Markdown</button>
+          <button id="download-btn" disabled>Download README.md</button>
+        </div>
+      </div>
+      <div class="output-tabs">
+        <button class="otab-btn active" data-otab="rendered">Rendered</button>
+        <button class="otab-btn" data-otab="raw">Raw Markdown</button>
+      </div>
+      <div id="rendered-output" class="markdown-body"><p class="placeholder">Your generated README will appear here.</p></div>
+      <textarea id="raw-output" class="hidden" readonly></textarea>
+    </section>
+  </main>
+
+  <footer>
+    <p>Runs entirely from static analysis + an optional LLM pass — no account needed.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
